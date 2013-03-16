@@ -1,0 +1,42 @@
+Jb\SimpleForumBundle\Entity\ForumCategory:
+    type: entity
+    table: simpleforum_category
+    id:
+        id:
+            type: integer
+            strategy: AUTO
+    fields:
+        name:
+            type: string
+            notnull: true
+            length: 255
+        parentId:
+            type: integer
+            column: parent_id
+        pathString:
+            type: string
+            length: 255
+            column: path_string
+        createdAt:
+            type: datetime
+            column: created_at
+        updatedAt:
+            type: datetime
+            column: updated_at
+    manyToOne:
+        parent:
+            targetEntity: ForumCategory
+            inversedBy: children
+            joinColumn:
+                name: parent_id
+                referencedColumnName: id
+    oneToMany:
+        children:
+            targetEntity: ForumCategory
+            mappedBy: parent
+            joinColumn:
+                name: id
+                referencedColumnName: parent_id
+    lifecycleCallbacks:
+        prePersist: [ updateDate ]
+        postPersist: [  ]
