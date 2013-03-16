@@ -1,12 +1,24 @@
 parameters:
-    simpleforum.kernel.request.listener.class: Jb\SimpleForumBundle\EventListener\KernelRequestListener
+    simpleforum.kernel.request.router_listener.class: Jb\SimpleForumBundle\EventListener\ForumRouterListener
+    simpleforum.doctrine.sluggable_listener: Jb\SimpleForumBundle\EventListener\SluggableListener
+    simpleforum.doctrine.sluggify: Jb\SimpleForumBundle\Services\Sluggable\SlugifyTools
 
 services:
-    simpleforum.kernel.request.listener:
-        class: %simpleforum.kernel.request.listener.class%
+    simpleforum.kernel.request.router_listener:
+        class: %simpleforum.kernel.request.router_listener.class%
         arguments:
             - "@router"
             - "@router.request_context"
             - "@logger"
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 32 }
+
+    simpleforum.doctrine.sluggable_listener:
+        class: %simpleforum.doctrine.sluggable_listener%
+        arguments:
+            - "@simpleforum.sluggify"
+        tags:
+            - { name: doctrine.event_listener, event: prePersist, method: prePersist }
+
+    simpleforum.sluggify:
+        class: %simpleforum.doctrine.sluggify%

@@ -5,7 +5,7 @@ namespace Jb\SimpleForumBundle\EventListener;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernel;
 
-class KernelRequestListener
+class ForumRouterListener
 {
     public function onKernelRequest(GetResponseEvent $event)
     {

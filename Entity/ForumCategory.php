@@ -3,6 +3,7 @@
 namespace Jb\SimpleForumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Jb\SimpleForumBundle\Services\SimpleForumTools;
 
 /**
  * ForumCategory
@@ -28,6 +29,11 @@ class ForumCategory
      * @var string
      */
     private $pathString;
+
+    /**
+     * @var string
+     */
+    private $slug;
 
     /**
      * @var \DateTime
@@ -147,6 +153,29 @@ class ForumCategory
     public function getPathString()
     {
         return $this->pathString;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return ForumCategory
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 
     /**

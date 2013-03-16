@@ -8,7 +8,7 @@ Jb\SimpleForumBundle\Entity\ForumCategory:
     fields:
         name:
             type: string
-            notnull: true
+            nullabble: false
             length: 255
         parentId:
             type: integer
@@ -19,6 +19,10 @@ Jb\SimpleForumBundle\Entity\ForumCategory:
             length: 255
             nullable: true
             column: path_string
+        slug:
+            type: string
+            length: 255
+            nullable: false
         createdAt:
             type: datetime
             column: created_at

@@ -28,8 +28,16 @@ class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterfac
                     'parent' => 'Film',
             ),
             array(
+                    'name' => 'Science-Fiction',
+                    'parent' => 'Film',
+            ),
+            array(
                     'name' => 'Series',
                     'parent' => 'Forum',
+            ),
+            array(
+                    'name' => 'Science-Fiction',
+                    'parent' => 'Series',
             ),
     );
 
