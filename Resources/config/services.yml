@@ -1,0 +1,12 @@
+parameters:
+    simpleforum.kernel.request.listener.class: Jb\SimpleForumBundle\EventListener\KernelRequestListener
+
+services:
+    simpleforum.kernel.request.listener:
+        class: %simpleforum.kernel.request.listener.class%
+        arguments:
+            - "@router"
+            - "@router.request_context"
+            - "@logger"
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 32 }
