@@ -4,7 +4,7 @@ Jb\SimpleForumBundle\Entity\ForumCategory:
     id:
         id:
             type: integer
-            strategy: AUTO
+            generator: { strategy: AUTO }
     fields:
         name:
             type: string
@@ -12,10 +12,12 @@ Jb\SimpleForumBundle\Entity\ForumCategory:
             length: 255
         parentId:
             type: integer
+            nullable: true
             column: parent_id
         pathString:
             type: string
             length: 255
+            nullable: true
             column: path_string
         createdAt:
             type: datetime
@@ -30,13 +32,11 @@ Jb\SimpleForumBundle\Entity\ForumCategory:
             joinColumn:
                 name: parent_id
                 referencedColumnName: id
+                onDelete: CASCADE
     oneToMany:
         children:
             targetEntity: ForumCategory
             mappedBy: parent
-            joinColumn:
-                name: id
-                referencedColumnName: parent_id
     lifecycleCallbacks:
         prePersist: [ updateDate ]
         postPersist: [  ]
