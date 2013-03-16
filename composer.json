@@ -1,0 +1,30 @@
+{
+    "name":        "jbouzekri/simpleforumbundle",
+    "type":        "symfony-bundle",
+    "description": "This bundle provide simple forum functions",
+    "keywords":    ["jbouzekri", "symfony", "bundle", "forum"],
+    "homepage":    "http://github.com/jbouzekri/SimpleForumBundle",
+    "license":     "MIT",
+
+    "authors": [
+        {
+            "name": "Jonathan Bouzekri",
+            "homepage": "http://github.com/jbouzekri"
+        }
+    ],
+
+    "require": {
+        "php":                      ">=5.3.3",
+        "symfony/framework-bundle": ">=2.0.0"
+    },
+
+    "minimum-stability": "dev",
+
+    "autoload": {
+        "psr-0": {
+            "Jb\\SimpleForumBundle": ""
+        }
+    },
+
+    "target-dir": "Jb/SimpleForumBundle"
+}
