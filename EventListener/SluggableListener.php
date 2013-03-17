@@ -20,7 +20,7 @@ class SluggableListener implements EventSubscriberInterface
         $entity = $args->getEntity();
         $entityManager = $args->getEntityManager();
         
-        if ($entity instanceof \Jb\SimpleForumBundle\Entity\ForumCategory) {
+        if ($entity instanceof \Jb\SimpleForumBundle\Entity\Category) {
             $entity->setSlug($this->slugifyService->slugify($entity->getName()));
         }
     }

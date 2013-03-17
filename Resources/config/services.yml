@@ -1,18 +1,26 @@
 parameters:
-    simpleforum.kernel.request.router_listener.class: Jb\SimpleForumBundle\EventListener\ForumRouterListener
+    simpleforum.kernel.request.router_listener.class: Jb\SimpleForumBundle\EventListener\RouterListener
     simpleforum.doctrine.sluggable_listener: Jb\SimpleForumBundle\EventListener\SluggableListener
     simpleforum.doctrine.sluggify: Jb\SimpleForumBundle\Services\Sluggable\SlugifyTools
+    simpleforum.router.matcher.class: Jb\SimpleForumBundle\Routing\Matcher
+    simpleforum.router.urlmatcher_chain.class: Jb\SimpleForumBundle\Routing\UrlMatcherChain
+    simpleforum.router.urlmatcher_category.class: Jb\SimpleForumBundle\Routing\Route\CategoryRoute
+    simpleforum.router.urlmatcher_topic.class: Jb\SimpleForumBundle\Routing\Route\TopicRoute
 
 services:
+
+    # Listener used before native RouteListener (priority 32) in order to try matching request with forum tree structure
     simpleforum.kernel.request.router_listener:
         class: %simpleforum.kernel.request.router_listener.class%
         arguments:
-            - "@router"
+            - "@simpleforum.router.matcher"
             - "@router.request_context"
             - "@logger"
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 32 }
+            - { name: monolog.logger, channel: request }
 
+    # custom sluggable listener for doctrine
     simpleforum.doctrine.sluggable_listener:
         class: %simpleforum.doctrine.sluggable_listener%
         arguments:
@@ -20,5 +28,32 @@ services:
         tags:
             - { name: doctrine.event_listener, event: prePersist, method: prePersist }
 
+    # tools to sluggify string
     simpleforum.sluggify:
         class: %simpleforum.doctrine.sluggify%
+
+    # Forum router service
+    simpleforum.router.matcher:
+        class: %simpleforum.router.matcher.class%
+        arguments:
+            - "@simpleforum.router.urlmatcher_chain"
+
+    # Forum url matchers chain
+    simpleforum.router.urlmatcher_chain:
+        class: %simpleforum.router.urlmatcher_chain.class%
+
+    # Url matcher for category url
+    simpleforum.router.urlmatcher_category:
+        class: %simpleforum.router.urlmatcher_category.class%
+        arguments:
+            - "@router.request_context"
+        tags:
+            -  { name: simpleforum.urlmatcher }
+
+    # Url matcher for topic url
+    simpleforum.router.urlmatcher_topic:
+        class: %simpleforum.router.urlmatcher_topic.class%
+        arguments:
+            - "@router.request_context"
+        tags:
+            -  { name: simpleforum.urlmatcher }

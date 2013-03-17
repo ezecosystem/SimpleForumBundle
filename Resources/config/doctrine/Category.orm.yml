@@ -1,4 +1,4 @@
-Jb\SimpleForumBundle\Entity\ForumCategory:
+Jb\SimpleForumBundle\Entity\Category:
     type: entity
     table: simpleforum_category
     id:
@@ -31,7 +31,7 @@ Jb\SimpleForumBundle\Entity\ForumCategory:
             column: updated_at
     manyToOne:
         parent:
-            targetEntity: ForumCategory
+            targetEntity: Category
             inversedBy: children
             joinColumn:
                 name: parent_id
@@ -39,7 +39,7 @@ Jb\SimpleForumBundle\Entity\ForumCategory:
                 onDelete: CASCADE
     oneToMany:
         children:
-            targetEntity: ForumCategory
+            targetEntity: Category
             mappedBy: parent
     lifecycleCallbacks:
         prePersist: [ updateDate ]

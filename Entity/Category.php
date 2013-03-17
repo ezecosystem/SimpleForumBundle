@@ -3,12 +3,11 @@
 namespace Jb\SimpleForumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Jb\SimpleForumBundle\Services\SimpleForumTools;
 
 /**
- * ForumCategory
+ * Category
  */
-class ForumCategory
+class Category
 {
     /**
      * @var integer
@@ -51,7 +50,7 @@ class ForumCategory
     private $children;
 
     /**
-     * @var \Jb\SimpleForumBundle\Entity\ForumCategory
+     * @var \Jb\SimpleForumBundle\Entity\Category
      */
     private $parent;
 
@@ -67,7 +66,7 @@ class ForumCategory
      * Set id
      *
      * @param integer $id
-     * @return ForumCategory
+     * @return Category
      */
     public function setId($id)
     {
@@ -90,7 +89,7 @@ class ForumCategory
      * Set name
      *
      * @param string $name
-     * @return ForumCategory
+     * @return Category
      */
     public function setName($name)
     {
@@ -113,7 +112,7 @@ class ForumCategory
      * Set parentId
      *
      * @param integer $parentId
-     * @return ForumCategory
+     * @return Category
      */
     public function setParentId($parentId)
     {
@@ -136,7 +135,7 @@ class ForumCategory
      * Set pathString
      *
      * @param string $pathString
-     * @return ForumCategory
+     * @return Category
      */
     public function setPathString($pathString)
     {
@@ -159,7 +158,7 @@ class ForumCategory
      * Set slug
      *
      * @param string $slug
-     * @return ForumCategory
+     * @return Category
      */
     public function setSlug($slug)
     {
@@ -182,7 +181,7 @@ class ForumCategory
      * Set createdAt
      *
      * @param \DateTime $createdAt
-     * @return ForumCategory
+     * @return Category
      */
     public function setCreatedAt($createdAt)
     {
@@ -205,7 +204,7 @@ class ForumCategory
      * Set updatedAt
      *
      * @param \DateTime $updatedAt
-     * @return ForumCategory
+     * @return Category
      */
     public function setUpdatedAt($updatedAt)
     {
@@ -227,10 +226,10 @@ class ForumCategory
     /**
      * Add children
      *
-     * @param \Jb\SimpleForumBundle\Entity\ForumCategory $children
-     * @return ForumCategory
+     * @param \Jb\SimpleForumBundle\Entity\Category $children
+     * @return Category
      */
-    public function addChildren(\Jb\SimpleForumBundle\Entity\ForumCategory $children)
+    public function addChildren(\Jb\SimpleForumBundle\Entity\Category $children)
     {
         $this->children[] = $children;
     
@@ -240,9 +239,9 @@ class ForumCategory
     /**
      * Remove children
      *
-     * @param \Jb\SimpleForumBundle\Entity\ForumCategory $children
+     * @param \Jb\SimpleForumBundle\Entity\Category $children
      */
-    public function removeChildren(\Jb\SimpleForumBundle\Entity\ForumCategory $children)
+    public function removeChildren(\Jb\SimpleForumBundle\Entity\Category $children)
     {
         $this->children->removeElement($children);
     }
@@ -260,10 +259,10 @@ class ForumCategory
     /**
      * Set parent
      *
-     * @param \Jb\SimpleForumBundle\Entity\ForumCategory $parent
-     * @return ForumCategory
+     * @param \Jb\SimpleForumBundle\Entity\Category $parent
+     * @return Category
      */
-    public function setParent(\Jb\SimpleForumBundle\Entity\ForumCategory $parent = null)
+    public function setParent(\Jb\SimpleForumBundle\Entity\Category $parent = null)
     {
         $this->parent = $parent;
     
@@ -273,7 +272,7 @@ class ForumCategory
     /**
      * Get parent
      *
-     * @return \Jb\SimpleForumBundle\Entity\ForumCategory 
+     * @return \Jb\SimpleForumBundle\Entity\Category 
      */
     public function getParent()
     {
