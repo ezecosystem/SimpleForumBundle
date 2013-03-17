@@ -6,6 +6,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernel;
 use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Jb\SimpleForumBundle\Routing\Matcher;
 
 class RouterListener

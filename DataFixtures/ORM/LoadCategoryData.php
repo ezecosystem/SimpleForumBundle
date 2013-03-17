@@ -5,7 +5,7 @@ namespace Jb\SimpleForumBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
-use Jb\SimpleForumBundle\Entity\ForumCategory;
+use Jb\SimpleForumBundle\Entity\Category;
 
 class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterface
 {
@@ -28,21 +28,13 @@ class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterfac
                     'parent' => 'Film',
             ),
             array(
-                    'name' => 'Science-Fiction',
-                    'parent' => 'Film',
-            ),
-            array(
                     'name' => 'Series',
                     'parent' => 'Forum',
-            ),
-            array(
-                    'name' => 'Science-Fiction',
-                    'parent' => 'Series',
             ),
     );
 
     foreach ($list as $forum) {
-        $element = new ForumCategory();
+        $element = new Category();
         $element->setName($forum['name']);
         
         if (isset($forum['parent'])) 

@@ -13,8 +13,13 @@ class UrlMatcherChain
         $this->matchers = array();
     }
 
-    public function addRouter(UrlMatcherInterface $matcher )
+    public function addMatcher(UrlMatcherInterface $matcher )
     {
         $this->matchers[] = $matcher;
+    }
+    
+    public function getMatchers() 
+    {
+        return $this->matchers;
     }
 }

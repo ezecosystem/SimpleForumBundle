@@ -23,7 +23,7 @@ class UrlMatcherCompilerPass implements CompilerPassInterface
         );
         foreach ($taggedServices as $id => $attributes) {
             $definition->addMethodCall(
-                'addRouter',
+                'addMatcher',
                 array(new Reference($id))
             );
         }
