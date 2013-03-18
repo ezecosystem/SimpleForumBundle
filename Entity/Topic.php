@@ -1,11 +1,22 @@
 <?php
 
+/*
+ * This file is part of the SimpleForumBundle
+ *
+ * (c) Jonathan Bouzekri <jonathan.bouzekri@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Jb\SimpleForumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Topic
+ * Topic entity for forum
+ *
+ * @author Jonathan Bouzekri <jonathan.bouzekri@gmail.com>
  */
 class Topic implements \Serializable
 {
@@ -232,6 +243,11 @@ class Topic implements \Serializable
         $this->setUpdatedAt(new \DateTime());
     }
     
+    /**
+     * Get the path of the topic
+     * 
+     * @return array
+     */
     public function getPath()
     {
         $path = $this->getCategory()->getPath();

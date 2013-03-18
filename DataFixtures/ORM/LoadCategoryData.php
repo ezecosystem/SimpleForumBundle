@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the SimpleForumBundle
+ *
+ * (c) Jonathan Bouzekri <jonathan.bouzekri@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Jb\SimpleForumBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -7,6 +16,11 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Jb\SimpleForumBundle\Entity\Category;
 
+/**
+ * Load some categories for easier development using fixtures
+ * 
+ * @author Jonathan Bouzekri <jonathan.bouzekri@gmail.com>
+ */
 class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterface
 {
 

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the SimpleForumBundle
+ *
+ * (c) Jonathan Bouzekri <jonathan.bouzekri@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Jb\SimpleForumBundle\Routing\Route;
 
 use Doctrine\ORM\EntityManager;
@@ -7,6 +16,11 @@ use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 use Symfony\Component\Routing\RequestContext;
 use Jb\SimpleForumBundle\Entity\Category;
 
+/**
+ * CategoryRoute is the url matcher for category path
+ *
+ * @author Jonathan Bouzekri <jonathan.bouzekri@gmail.com>
+ */
 class CategoryRoute implements UrlMatcherInterface
 {
     /**
@@ -30,7 +44,7 @@ class CategoryRoute implements UrlMatcherInterface
     public function match($pathinfo) 
     {
         $i = 0;
-        $category = $this->em->getRepository('SimpleForumBundle:Category')->findOneBySlug($pathinfo[$i]);
+        $category = $this->em->getRepository('SimpleForumBundle:Category')->findOneBySlug(strtolower($pathinfo[$i]));
         
         if (!$category) {
             return false;
@@ -40,7 +54,7 @@ class CategoryRoute implements UrlMatcherInterface
         while ($parent = $loopCategory->getParent()) {
             $i++;
             if (!isset($pathinfo[$i]) || 
-                !($parent instanceof Category && $parent->getSlug() == $pathinfo[$i])
+                !($parent instanceof Category && $parent->getSlug() == strtolower($pathinfo[$i]))
             ) {
                 return false;
             }

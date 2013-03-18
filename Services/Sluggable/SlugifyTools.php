@@ -1,9 +1,29 @@
 <?php
 
+/*
+ * This file is part of the SimpleForumBundle
+ *
+ * (c) Jonathan Bouzekri <jonathan.bouzekri@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Jb\SimpleForumBundle\Services\Sluggable;
 
+/**
+ * SlugifyTools is a service which provide slugify tools
+ *
+ * @author Jonathan Bouzekri <jonathan.bouzekri@gmail.com>
+ */
 class SlugifyTools 
 {
+    /**
+     * Slugify a string
+     * 
+     * @param type $string the string to slugify
+     * @return string
+     */
     public function slugify($string) 
     {
         // replace non letter or digits by -
@@ -30,5 +50,3 @@ class SlugifyTools
         return $string;
     }
 }
-
-?>
