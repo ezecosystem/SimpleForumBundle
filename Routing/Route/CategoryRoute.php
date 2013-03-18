@@ -29,8 +29,6 @@ class CategoryRoute implements UrlMatcherInterface
     
     public function match($pathinfo) 
     {
-        $match = true;
-        
         $i = 0;
         $category = $this->em->getRepository('SimpleForumBundle:Category')->findOneBySlug($pathinfo[$i]);
         

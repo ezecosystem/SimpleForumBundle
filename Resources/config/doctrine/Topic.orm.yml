@@ -1,6 +1,6 @@
-Jb\SimpleForumBundle\Entity\Category:
+Jb\SimpleForumBundle\Entity\Topic:
     type: entity
-    table: simpleforum_category
+    table: simpleforum_topic
     id:
         id:
             type: integer
@@ -10,15 +10,13 @@ Jb\SimpleForumBundle\Entity\Category:
             type: string
             nullabble: false
             length: 255
-        parentId:
+        categoryId:
             type: integer
             nullable: true
-            column: parent_id
-        pathString:
-            type: string
-            length: 255
-            nullable: true
-            column: path_string
+            column: category_id
+        content:
+            type: text
+            nullabble: true
         slug:
             type: string
             length: 255
@@ -30,20 +28,13 @@ Jb\SimpleForumBundle\Entity\Category:
             type: datetime
             column: updated_at
     manyToOne:
-        parent:
+        category:
             targetEntity: Category
-            inversedBy: children
+            inversedBy: topics
             joinColumn:
-                name: parent_id
+                name: category_id
                 referencedColumnName: id
                 onDelete: CASCADE
-    oneToMany:
-        children:
-            targetEntity: Category
-            mappedBy: parent
-        topics:
-            targetEntity: Topic
-            mappedBy: category
     lifecycleCallbacks:
         prePersist: [ updateDate ]
         postPersist: [  ]

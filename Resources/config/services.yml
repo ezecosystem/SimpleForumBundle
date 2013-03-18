@@ -56,5 +56,7 @@ services:
         class: %simpleforum.router.urlmatcher_topic.class%
         arguments:
             - "@router.request_context"
+            - "@doctrine.orm.entity_manager"
+            - "@simpleforum.router.urlmatcher_category"
         tags:
             -  { name: simpleforum.urlmatcher }

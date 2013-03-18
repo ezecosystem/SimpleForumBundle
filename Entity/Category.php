@@ -55,6 +55,11 @@ class Category
     private $parent;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $topics;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -278,6 +283,40 @@ class Category
     {
         return $this->parent;
     }
+    
+    /**
+     * Add topics
+     *
+     * @param \Jb\SimpleForumBundle\Entity\Topic $topics
+     * @return Category
+     */
+    public function addTopic(\Jb\SimpleForumBundle\Entity\Topic $topics)
+    {
+        $this->topics[] = $topics;
+    
+        return $this;
+    }
+
+    /**
+     * Remove topics
+     *
+     * @param \Jb\SimpleForumBundle\Entity\Topic $topics
+     */
+    public function removeTopic(\Jb\SimpleForumBundle\Entity\Topic $topics)
+    {
+        $this->topics->removeElement($topics);
+    }
+
+    /**
+     * Get topics
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTopics()
+    {
+        return $this->topics;
+    }
+    
     /**
      * @ORM\PrePersist
      */
@@ -288,5 +327,22 @@ class Category
         }
         
         $this->setUpdatedAt(new \DateTime());
+    }
+    
+    public function getPath() 
+    {
+        $path   = array();
+        $parent = $this->getParent();
+        
+        if (!($parent instanceof Category)) {
+            return $path;
+        }
+        
+        $path[] = $parent;
+        while ($parent = $parent->getParent()) {
+            $path[] = $parent;
+        }
+        
+        return array_reverse($path);
     }
 }
