@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Category
  */
-class Category
+class Category implements \Serializable
 {
     /**
      * @var integer
@@ -344,5 +344,40 @@ class Category
         }
         
         return array_reverse($path);
+    }
+    
+    /**
+     * @see \Serializable::serialize()
+     */
+    public function serialize() {
+        return \serialize(array(
+            $this->id,
+            $this->name,
+            $this->parentId,
+            $this->pathString,
+            $this->slug,
+            $this->createdAt,
+            $this->updatedAt,
+            serialize($this->parent),
+        ));
+    }
+
+    /**
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->name,
+            $this->parentId,
+            $this->pathString,
+            $this->slug,
+            $this->createdAt,
+            $this->updatedAt,
+            $parent,
+        ) = \unserialize($serialized);
+
+        $this->parent = unserialize($parent);
     }
 }

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Topic
  */
-class Topic
+class Topic implements \Serializable
 {
     /**
      * @var integer
@@ -238,5 +238,40 @@ class Topic
         $path[] = $this->getCategory();
         
         return $path;
+    }
+
+    /**
+     * @see \Serializable::serialize()
+     */
+    public function serialize() {
+        return \serialize(array(
+            $this->id,
+            $this->name,
+            $this->categoryId,
+            $this->content,
+            $this->slug,
+            $this->createdAt,
+            $this->updatedAt,
+            serialize($this->category),
+        ));
+    }
+
+    /**
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->name,
+            $this->categoryId,
+            $this->content,
+            $this->slug,
+            $this->createdAt,
+            $this->updatedAt,
+            $category,
+        ) = \unserialize($serialized);
+
+        $this->category = unserialize($category);
     }
 }

@@ -6,6 +6,7 @@ parameters:
     simpleforum.router.urlmatcher_chain.class: Jb\SimpleForumBundle\Routing\UrlMatcherChain
     simpleforum.router.urlmatcher_category.class: Jb\SimpleForumBundle\Routing\Route\CategoryRoute
     simpleforum.router.urlmatcher_topic.class: Jb\SimpleForumBundle\Routing\Route\TopicRoute
+    simpleforum.router.cache.class: Doctrine\Common\Cache\ApcCache
 
 services:
 
@@ -37,6 +38,7 @@ services:
         class: %simpleforum.router.matcher.class%
         arguments:
             - "@simpleforum.router.urlmatcher_chain"
+            - "@simpleforum.router.cache"
 
     # Forum url matchers chain
     simpleforum.router.urlmatcher_chain:
@@ -60,3 +62,6 @@ services:
             - "@simpleforum.router.urlmatcher_category"
         tags:
             -  { name: simpleforum.urlmatcher }
+    
+    simpleforum.router.cache:
+        class: %simpleforum.router.cache.class%
